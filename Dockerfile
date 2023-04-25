@@ -1,18 +1,18 @@
-# Spring BootƒAƒvƒŠ‚ğƒrƒ‹ƒh‚·‚é‚½‚ßMaven/Java8‚ÌDockerƒCƒ[ƒW‚ğ—˜—p
+# Spring Bootã‚¢ãƒ—ãƒªã‚’ãƒ“ãƒ«ãƒ‰ã™ã‚‹ãŸã‚Maven/Java8ã®Dockerã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’åˆ©ç”¨
 FROM maven:3.5-jdk-8-alpine AS builder
 
-# ƒrƒ‹ƒh‚Ìƒ[ƒNƒfƒBƒŒƒNƒgƒŠ‚Ìİ’è
+# ãƒ“ãƒ«ãƒ‰æ™‚ã®ãƒ¯ãƒ¼ã‚¯ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®è¨­å®š
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Maven package‚Åƒrƒ‹ƒh‚ÆƒeƒXƒg‚ğÀs‚µ¬‰Ê•¨(jarƒtƒ@ƒCƒ‹)‚ğì¬
+# Maven packageã§ãƒ“ãƒ«ãƒ‰ã¨ãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã—æˆæœç‰©(jarãƒ•ã‚¡ã‚¤ãƒ«)ã‚’ä½œæˆ
 RUN mvn package
 
-# Spring BootƒAƒvƒŠ‚ÌÀsŠÂ‹«‚Éopenjdk:8-jre-alpine‚ğ—˜—p
+# Spring Bootã‚¢ãƒ—ãƒªã®å®Ÿè¡Œç’°å¢ƒã«openjdk:8-jre-alpineã‚’åˆ©ç”¨
 FROM openjdk:8-jre-alpine
 
 COPY --from=builder /app/target/Spring-Boot-RESTful-API-Test-Sample-1.0.0-SNAPSHOT.jar /app.jar
 
-# Docker Run‚ÉjavaƒRƒ}ƒ“ƒh‚ÅSpring Boot‚ğ‹N“®(Embedded Tomcat‚ğ‹N“®)
+# Docker Runæ™‚ã«javaã‚³ãƒãƒ³ãƒ‰ã§Spring Bootã‚’èµ·å‹•(Embedded Tomcatã‚’èµ·å‹•)
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
