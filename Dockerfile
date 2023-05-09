@@ -1,5 +1,6 @@
 # Spring BootアプリをビルドするためMaven/Java8のDockerイメージを利用
-FROM maven:3.5-jdk-8-alpine AS builder
+#FROM maven:3.5-jdk-8-alpine AS builder
+FROM maven:3.5.3-jdk-8 AS builder
 
 # ビルド時のワークディレクトリの設定
 WORKDIR /app
